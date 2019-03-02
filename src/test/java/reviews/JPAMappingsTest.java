@@ -1,19 +1,21 @@
 package reviews;
 
+import static org.junit.Assert.assertThat;
+import static org.hamcrest.CoreMatchers.is;
+
 import java.util.Optional;
 
 import javax.annotation.Resource;
 
-import static org.junit.Assert.assertThat;
-import static org.hamcrest.CoreMatchers.is;
+
 
 import org.junit.Test;
-import org.junit.runner.Runwith;
+import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@Runwith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
 @DataJpaTest
 
 public class JPAMappingsTest {
@@ -27,14 +29,14 @@ public class JPAMappingsTest {
 	@Test
 	public void shouldSaveAndLoadCategory() {
 		Category category = categoryRepo.save(new Category("category"));
-		long categoryId = category.getId();
+		Long categoryId = category.getId();
 		
 		entityManager.flush();
 		entityManager.clear();
 		
-		Optional<Category> result = categoryRepo.findById(categoryId);
-		result.get();
-		assertThat(category.getName(), is("category"));
+		Category result = categoryRepo.findById(categoryId).get();
+	
+		assertThat(result.getName(), is("category"));
 		
 	}
 
