@@ -1,0 +1,128 @@
+* {
+	font-family: sans-serif;
+	line-height: 1.618em;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+h1, h2 {
+	color: blue;
+}
+
+header,
+main,
+footer {
+	margin: 0 auto;
+	max-width: 800px;
+}
+
+html {
+	font-size: 16px;
+
+	margin-top: 3em;
+}
+
+header {
+	padding: 2em 0;
+}
+
+header h1 {
+	font-size: 3em;
+}
+
+header span {
+	font-size: 1.5em;
+	color: 999;
+}
+
+nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+
+	display: flex;
+	flex-flow: row;
+	justify-content: center;
+
+	background: darkblue;
+}
+
+nav a {
+	padding: .5em 2em;
+	text-decoration: none;
+	color:#fff;
+}
+
+nav a:hover {
+	background: lightblue;
+}
+
+section {
+	margin: 1em 0;
+
+	padding-top: 3em;
+	min-height: 20em;
+}
+
+section > p {
+	margin: 1em 0;
+}
+
+#movie {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: auto;
+
+	grid-column-gap: 1em;
+}
+
+#movie article img {
+	width: 70%;
+	border-radius: 50%; 
+	margin: auto;
+	padding: 1em;
+}
+
+#food {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: auto;
+
+	grid-column-gap: 1em;
+}
+
+#food article img {
+	width: 70%;
+	border-radius: 50%; 
+	margin: auto;
+	padding: 1em;
+}
+
+#travel {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: auto;
+
+	grid-column-gap: 1em;
+}
+
+#travel article img {
+	width: 70%;
+	border-radius: 50%; 
+	margin: auto;
+	padding: 1em;
+}
+
+
+footer {
+	margin-top: 2em;
+	margin-bottom: 1em;
+	background: darkblue;
+	color: #fff;
+	padding: 1em 0;
+	text-align: center;
+}
+
+

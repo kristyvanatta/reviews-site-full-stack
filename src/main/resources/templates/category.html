@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>A Category</title>
+</head>
+<body>
+	<h1>A Single Category</h1>
+
+	<div th:each = "category: ${categories}">
+		<p th:text = "${category.name}"></p>
+				
+		<a href="http://localhost:8080/categories">Back to home</a>
+	</div>
+	
+	<div th:each="review: ${reviews}">
+		<h2>
+			<a th:href=@"{/review(id=${review.id})}" th:text="${review.name}"><a/>
+		</h2>
+	</div>
+
+</body>
+</html>	

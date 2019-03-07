@@ -1,39 +1,44 @@
 package reviews;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Category {
+public class Review {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	
-	
+	@Lob 
 	@NotNull
 	@Column(columnDefinition = "VARCHAR", length = 100)
 	private String name;
+	private String description;
+	private String image;
 	
-	@ManyToMany(mappedBy = "categories")
-	private Collection<Review> reviews;
+	@ManyToMany
+	private Collection<Category> categories;
 	
-	public Category() {
+	public Review() {
 		
 	}
 	
-	public Category(String name) {
-		this.name = name;
-	}
-		
-	public Collection<Review> getReviews(){
-		return reviews;
+	public Review(String name, String description, String image, Category...categories) {
+	this.name = name;
+	this.description = description;
+	this.image = image;
+	this.categories = new HashSet<>(Arrays.asList(categories));
 	}
 
 	public Long getId() {
@@ -42,6 +47,18 @@ public class Category {
 
 	public String getName() {
 		return name;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+	
+	public String getImage() {
+		return image;
+	}
+
+	public Collection<Category> getCategories() {
+		return categories;
 	}
 
 	@Override
@@ -60,7 +77,7 @@ public class Category {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Category other = (Category) obj;
+		Review other = (Review) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -69,6 +86,8 @@ public class Category {
 		return true;
 	}
 	
+	
 
+	
 
 }

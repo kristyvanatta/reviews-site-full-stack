@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>A Review</title>
+
+	<link rel="stylesheet" type="text/css" href= "./style.css">
+</head>
+<body>
+
+	<header>
+		<h1>A Single Review</h1>
+	</header>
+
+	<div th:each = "review: ${reviews}">
+		<p th:text = "${review.name}"></p>
+		<p th:text = "${review.description}"></p>
+		<img th:src="@{/images/{image}(image=${review.image})}" height="50" width="50"/>
+		<p th:text = "${review.image}"></p>
+			
+		<a href="http://localhost:8080/reviews">Back to home</a>
+	</div>
+
+	<main>
+		<section id="movie">
+			<h2>Furious 7</h2>
+			<div id="movie">
+				<article>
+					<img src="./images/movie.jpg">
+				</article>
+			</div>
+		</section>
+		<section id="food">
+			<h2>Pizza</h2>
+			<div id="food">
+				<article>
+					<img src="./images/food.jpg">
+				</article>
+			</div>
+		</section>
+		<section id="travel">
+			<h2>Beach</h2>
+			<div id="food">
+				<article>
+					<img src="./images/travel.jpg">
+				</article>
+			</div>
+		</section>
+	</main>
+
+	<nav>
+
+	<footer>
+		Reviews-Site-Full-Stack
+	</footer>
+
+
+</body>
+</html>	
