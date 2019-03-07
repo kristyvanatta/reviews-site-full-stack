@@ -51,7 +51,7 @@ public class JPAMappingsTest {
 	
 	@Test
 	public void shouldSaveAndLoadReview() {
-		Review review = reviewRepo.save(new Review("rev1","desc1", "image", null));
+		Review review = reviewRepo.save(new Review("rev1","desc1", "image"));
 		Long reviewId = review.getId();
 		
 		entityManager.flush();
