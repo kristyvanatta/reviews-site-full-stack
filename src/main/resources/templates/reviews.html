@@ -11,6 +11,57 @@
 		<a th:href="@{/review(id=${review.id})}" th:text="${review.name}"></a>
 		</li>
 	</div>
+	
+	<form method="POST">
+		<div>
+			<label>Enter Review Name:</label>
+			<input type="text" name="reviewName" />
+		</div>
+		
+		<div>
+			<label>Enter Review Description:</label>
+			<input type="text" name="reviewDescription" />
+		</div>
+		
+		<div>
+			<label>Enter Review Image:</lable>
+			<input type="text" name="reviewImage" />
+		</div>
+		
+		<div>
+			<label>Enter Category:</label>
+			<input type="text" name="categoryName" />
+		</div>
+		
+		<div>
+		<button th:formaction=@{add-review}"> add review</button>
+		</div>
+		
+	</form>
+	
+	<form method="POST">
+		<div>
+			<lable>Enter Review Name:</lable>
+			<input type="text" name="reviewName" />
+		</div>
+		
+		<div>
+		<button th:formaction=@{delete-review}"> delete review</button>
+		</div>
+		
+	</form>
+	
+	<form method="GET">
+		<div>
+		<label>Enter Category Name:</lable>
+		<input type="text" name="categoryName" />
+		</div>
+		
+		<div>
+		<button th:formaction="@{/find-by-category}"> find reviews</button>
+		</div>
+		
+	</form>
 
 </body>
 </html>	

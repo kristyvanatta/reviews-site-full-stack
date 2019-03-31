@@ -134,7 +134,7 @@ public class ReviewControllerMockMvcTest {
 		Collection<Category> allCategories = Arrays.asList(category, anotherCategory);
 		when(categoryRepo.findAll()).thenReturn(allCategories);
 		
-		mvc.perform(get("/category")).andExpect(model().attribute("categories", is(allCategories)));
+		mvc.perform(get("/categories")).andExpect(model().attribute("categories", is(allCategories)));
 	}
 	
 }

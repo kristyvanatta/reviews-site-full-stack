@@ -18,6 +18,9 @@ public class ReviewController {
 	@Resource
 	CategoryRespository categoryRepo;
 	
+	@Resource
+	CommentRepository commentRepo;
+	
 	
 	@RequestMapping("/review")
 	public String findOneReview(@RequestParam(value="id")long id, Model model) throws ReviewNotFoundException {
@@ -38,7 +41,7 @@ public class ReviewController {
 		
 	}
 	@RequestMapping("/category")
-	public String findOneCategory(long id, Model model) throws CategoryNotFoundException {
+	public String findOneCategory(Long id, Model model) throws CategoryNotFoundException {
 		Optional<Category> category =categoryRepo.findById(id);
 		
 		if(category.isPresent()) {
@@ -54,5 +57,63 @@ public class ReviewController {
 		return ("categories");
 		
 	}
+	
+	@RequestMapping("/add-review")
+	public String addReview(String reviewName, String reviewDescription, String reviewImage, String categoryName) {
+		Category category = categoryRepo.findByName(categoryName);
+		Review newReview = reviewRepo.findByName(reviewName);
+		
+		if(newReview==null) {
+			newReview = new Review(reviewName, reviewDescription, reviewImage, category);
+			reviewRepo.save(newReview);
+		}
+		return "redirect:/reviews"; 
+		
+	}
 
-}
+	@RequestMapping("/delete-review")
+	public String deleteReviewByName(String reviewName) {
+		
+		if(reviewRepo.findByName(reviewName) != null) {
+			Review deletedReview = reviewRepo.findByName(reviewName);
+			reviewRepo.delete(deletedReview);
+		}
+		
+		return "redirect:/reviews";
+		
+	}
+	
+	@RequestMapping("/del-review")
+	public String deleteReviewById(Long reviewId) {
+		
+		reviewRepo.deleteById(reviewId);
+		
+		return "redirect:/reviews";
+		
+	}
+	
+	@RequestMapping("/find-by-category")
+	public String findReviewsByCategory(String categoryName, Model model) {
+		Category category = categoryRepo.findByName(categoryName);
+		model.addAttribute("reviews", reviewRepo.findByCategoriesContains(category));
+		
+		return "/category";
+	}
+	
+	@RequestMapping("/comment")
+	public String findOneComment(@RequestParam(value="id")long id, Model model) throws CommentNotFoundException {
+		Optional<Comment> comment = commentRepo.findById(id);
+		
+		if(comment.isPresent()) {
+			model.addAttribute("comments", comment.get());
+			return "comment";
+		}
+		throw new CommentNotFoundException();
+			
+	}
+		
+	}
+
+	
+
+

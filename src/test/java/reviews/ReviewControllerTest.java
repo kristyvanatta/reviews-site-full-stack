@@ -16,20 +16,29 @@ import org.springframework.ui.Model;
 
 public class ReviewControllerTest {
 	
+	
 	@InjectMocks
 	private ReviewController underTest;
 	
 	@Mock
 	private Review review;
+	Long reviewId;
 	
 	@Mock
 	private Review anotherReview;
 	
 	@Mock
 	private ReviewRepository reviewRepo;
-	
+		
 	@Mock
 	private CategoryRespository categoryRepo;
+	
+	@Mock
+	private CommentRepository commentRepo;
+	
+	@Mock
+	private Comment comment;
+	Long commentId;
 	 
 	@Mock
 	private Category category;
@@ -39,7 +48,7 @@ public class ReviewControllerTest {
 	
 	@Mock
 	private Model model;
-	
+
 	
 	@Before
 	public void setUp() {
@@ -84,6 +93,52 @@ public class ReviewControllerTest {
 		verify(model).addAttribute("categories", allCategories);
 	}
 	
+	@Test
+	public void shouldAddAdditionalReviewsToModel() {
+		String categoryName = "category name";
+		Category newCategory = categoryRepo.findByName(categoryName);
+		String reviewName = "new review";
+		String reviewDescription = "new review description";
+		String reviewImage = "new review image";
+		underTest.addReview(reviewName, reviewDescription, reviewImage, categoryName);
+		Review newReview = new Review(reviewName, reviewDescription, reviewImage, newCategory);
+		when(reviewRepo.save(newReview)).thenReturn(newReview);
+	}
+	
+	@Test
+	public void shouldRemoveReviewFromModelByName() {
+		String reviewName = review.getName();
+		when(reviewRepo.findByName(reviewName)).thenReturn(review);
+		underTest.deleteReviewByName(reviewName);
+		verify(reviewRepo).delete(review);
+	}
+	
+	@Test
+	public void shouldRemoveReviewFromMobdelById() {
+		underTest.deleteReviewById(reviewId);
+		verify(reviewRepo).deleteById(reviewId);
+	}
+	
+	@Test
+	public void shouldAddSingleCommentToModel() throws CommentNotFoundException { 
+		long arbitraryCommentId = 1;
+		when(commentRepo.findById(arbitraryCommentId)).thenReturn(Optional.of(comment));
+		
+		underTest.findOneComment(arbitraryCommentId, model);
+		
+		verify(model).addAttribute("comments", comment);
+		
+	}
+	
+	
+	
+	
+		
+	}
+	
+
+	
+	
 	
 	
 	
@@ -94,4 +149,3 @@ public class ReviewControllerTest {
 	
 	
 
-}

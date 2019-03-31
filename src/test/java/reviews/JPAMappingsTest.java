@@ -26,6 +26,9 @@ public class JPAMappingsTest {
 	@Resource
 	private ReviewRepository reviewRepo;
 	
+	@Resource
+	private CommentRepository commentRepo;
+	
 	@Test
 	public void shouldSaveAndLoadCategory() {
 		Category category = categoryRepo.save(new Category("category"));
@@ -107,6 +110,18 @@ public class JPAMappingsTest {
 		Collection<Review> reviewsForCategory = reviewRepo.findByCategoriesId(categoryId);
 		
 		assertThat(reviewsForCategory, containsInAnyOrder(review1, review2));
+	}
+	
+	@Test
+	public void shouldSaveAndLoadComment() {
+		Comment comment = commentRepo.save(new Comment("comment"));
+		Long commentId = comment.getId();
+		
+		entityManager.flush();
+		entityManager.clear();
+		
+		Comment result = commentRepo.findById(commentId).get();
+		assertThat(result.getName(), is("comment"));
 	}
 	
 	

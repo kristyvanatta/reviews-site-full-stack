@@ -17,9 +17,7 @@
 		<img th:src="@{/images/{image}(image=${review.image})}" height="50" width="50"/>
 		<p th:text = "${review.image}"></p>
 			
-		<a href="http://localhost:8080/reviews">Back to home</a>
-	</div>
-
+	
 	<main>
 		<section id="movie">
 			<h2>Furious 7</h2>
@@ -46,6 +44,13 @@
 			</div>
 		</section>
 	</main>
+	
+	<form method = "POST">
+	<button type="submit" th:value="${review.id}"name="reviewId" th:formaction="@{del-review}">delete </button>
+	</form>
+	
+		<a href="http://localhost:8080/reviews">Back to home</a>
+	</div>
 
 	<nav>
 

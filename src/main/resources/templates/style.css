@@ -79,7 +79,7 @@ section > p {
 }
 
 #movie article img {
-	width: 70%;
+	width: 50%;
 	border-radius: 50%; 
 	margin: auto;
 	padding: 1em;
@@ -94,7 +94,7 @@ section > p {
 }
 
 #food article img {
-	width: 70%;
+	width: 50%;
 	border-radius: 50%; 
 	margin: auto;
 	padding: 1em;
@@ -109,7 +109,7 @@ section > p {
 }
 
 #travel article img {
-	width: 70%;
+	width: 50%;
 	border-radius: 50%; 
 	margin: auto;
 	padding: 1em;
