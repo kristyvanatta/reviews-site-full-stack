@@ -1,8 +1,10 @@
 package reviews;
 
+
 import java.util.Optional;
 
 import javax.annotation.Resource;
+import javax.persistence.ManyToMany;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -111,9 +113,20 @@ public class ReviewController {
 		throw new CommentNotFoundException();
 			
 	}
+	
+	@RequestMapping("/add-comment")
+	public String addComment(Long reviewId, String comment) {
+		
+		Optional<Review> review = reviewRepo.findById(reviewId);
+		if (review.isPresent()) {
+		Comment comment1 = new Comment(comment);
+		review.get().setComments(comment1);
+		}
+		
+		return "redirect:/reviews";
 		
 	}
 
-	
+}
 
 

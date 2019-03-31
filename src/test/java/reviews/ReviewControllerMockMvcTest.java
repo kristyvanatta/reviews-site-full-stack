@@ -1,4 +1,4 @@
-package reviews;
+ package reviews;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -32,6 +32,9 @@ public class ReviewControllerMockMvcTest {
 	@MockBean
 	private CategoryRespository categoryRepo;
 	
+	@MockBean
+	private CommentRepository commentRepo;
+	
 	@Mock
 	private Review review;
 	
@@ -43,6 +46,9 @@ public class ReviewControllerMockMvcTest {
 	
 	@Mock
 	private Category anotherCategory;
+	
+	@Mock
+	private Comment comment;
 	
 	@Test
 	public void shouldRouteToSingleReviewView() throws Exception {
@@ -135,6 +141,14 @@ public class ReviewControllerMockMvcTest {
 		when(categoryRepo.findAll()).thenReturn(allCategories);
 		
 		mvc.perform(get("/categories")).andExpect(model().attribute("categories", is(allCategories)));
+	}
+	
+	@Test
+	public void shoudPutSingleCommentIntoModel() throws Exception {
+		Set<Comment> thecomments = 
+		when(commentRepo.findById(1L)).thenReturn(Optional.of(comment));
+		
+		mvc.perform(get("/add-comment")).andExpect(model().attribute("comments", is(comment)));
 	}
 	
 }

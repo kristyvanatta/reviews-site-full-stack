@@ -12,7 +12,7 @@
 		</li>
 	</div>
 	
-	<form method="POST">
+	 <form method="POST">
 		<div>
 			<label>Enter Review Name:</label>
 			<input type="text" name="reviewName" />
@@ -24,7 +24,7 @@
 		</div>
 		
 		<div>
-			<label>Enter Review Image:</lable>
+			<label>Enter Review Image:</label>
 			<input type="text" name="reviewImage" />
 		</div>
 		
@@ -34,26 +34,24 @@
 		</div>
 		
 		<div>
-		<button th:formaction=@{add-review}"> add review</button>
+		<button th:formaction="@{/add-review}"> add review</button>
 		</div>
 		
-	</form>
+	</form> 
 	
 	<form method="POST">
 		<div>
-			<lable>Enter Review Name:</lable>
+			<label>Enter Review Name:</label>
 			<input type="text" name="reviewName" />
-		</div>
 		
-		<div>
-		<button th:formaction=@{delete-review}"> delete review</button>
+		<button th:formaction="@{/delete-review}"> delete review</button>
 		</div>
 		
 	</form>
 	
 	<form method="GET">
 		<div>
-		<label>Enter Category Name:</lable>
+		<label>Enter Category Name:</label>
 		<input type="text" name="categoryName" />
 		</div>
 		
